@@ -49,7 +49,5 @@ flowchart TD
 ](05_saved_rooms_functionality_.md)
 6. [Room Owner Dashboard
 ](06_room_owner_dashboard_.md)
-7. [Reusable UI Building Blocks
-](07_reusable_ui_building_blocks_.md)
 
 ---
