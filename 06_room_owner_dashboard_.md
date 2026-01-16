@@ -345,6 +345,7 @@ In this chapter, you've explored the **Room Owner Dashboard** – the central co
 
 You now understand how `RoomFinder` empowers its room owners. Next, we'll dive into how to build efficient and consistent user interfaces using reusable building blocks.
 
-[Next Chapter: Reusable UI Building Blocks](07_reusable_ui_building_blocks_.md)
+
+# THANK YOU FOR WATCHING! ❤️
 
 ---
