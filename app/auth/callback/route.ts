@@ -1,17 +1,25 @@
 import { createClient } from "@/lib/supabase/server"
-import { type NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url)
+export async function GET(request: Request) {
+  const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get("code")
 
-  if (code) {
-    const supabase = await createClient()
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
-    if (!error) {
-      return NextResponse.redirect(new URL("/", request.url))
-    }
+  // If no code, send user to login
+  if (!code) {
+    return NextResponse.redirect(`${origin}/auth/login`)
   }
 
-  return NextResponse.redirect(new URL("/auth/error", request.url))
+  const supabase = await createClient()
+
+  const { error } = await supabase.auth.exchangeCodeForSession(code)
+
+  // If exchange fails, go to error page
+  if (error) {
+    console.error("Auth callback error:", error.message)
+    return NextResponse.redirect(`${origin}/auth/error`)
+  }
+
+  // ✅ SUCCESS: cookies are now set
+  return NextResponse.redirect(`${origin}/`)
 }
